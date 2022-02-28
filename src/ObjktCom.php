@@ -7,6 +7,19 @@ class ObjktCom
 {
     const ENDPOINT = "https://objkt.com";
 
+    public static function creators(array $creators, $glue = ', ', $shorten = true)
+    {
+        $addresses_formatted = '';
+        foreach ($creators as $creator) {
+            $addresses_formatted .= trim(self::address($creator['holder'], $shorten));
+            if (last($creators) != $creator) {
+                $addresses_formatted .= $glue;
+            }
+        }
+
+        return $addresses_formatted;;
+    }
+
     public static function address($account, $shorten = true)
     {
         if (! empty($account['alias'])) {
