@@ -4,8 +4,7 @@ namespace kodeops\TezosMarketplacesUtils;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use kodeops\LaravelGraphQL\Query;
-
-use kodeops\TezosMarketplacesUtils\TezosMarketplacesUtilsException;
+use kodeops\TezosMarketplacesUtils\Exceptions\TezosMarketplacesUtilsException;
 use SalesBot\HenQueries;
 
 class Address

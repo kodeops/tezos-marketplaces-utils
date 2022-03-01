@@ -1,5 +1,5 @@
 <?php
-namespace kodeops\Exceptions\TezosMarketplacesUtils;
+namespace kodeops\TezosMarketplacesUtils\Exceptions;
 
 use Exception;
 
