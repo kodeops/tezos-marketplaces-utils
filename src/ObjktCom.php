@@ -53,6 +53,6 @@ class ObjktCom
 
     public static function addressUrl($address)
     {
-        return self::ENDPOINT . "/profile/{$$address}";
+        return self::ENDPOINT . "/profile/{$address}";
     }
 }
