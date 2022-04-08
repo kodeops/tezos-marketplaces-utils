@@ -6,4 +6,4 @@
 ```
  
 
-# Laravel GraphQL
+# Laravel Tezos Marketplaces Utils
