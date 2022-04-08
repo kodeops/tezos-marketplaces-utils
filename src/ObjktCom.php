@@ -48,7 +48,7 @@ class ObjktCom
 
     public static function tokenUrl($item)
     {
-        return self::ENDPOINT . "/{$item['fa']['contract']}/{$item['token']['token_id']}";
+        return self::ENDPOINT . "/{$item['fa']['contract']}/{$item['token_id']}";
     }
 
     public static function addressUrl($address)
