@@ -2,6 +2,7 @@
 namespace kodeops\TezosMarketplacesUtils;
 
 use kodeops\TezosMarketplacesUtils\Address;
+use kodeops\LaravelGraphQL\Query;
 
 class ObjktCom
 {
@@ -54,5 +55,24 @@ class ObjktCom
     public static function addressUrl($address)
     {
         return self::ENDPOINT . "/profile/{$address}";
+    }
+
+    public static function holder($address)
+    {
+        $query = 'query MyQuery($address: String) {
+          holder(where: {address: {_eq: $address}}) {
+            address
+            alias
+            description
+            email
+            twitter
+            tzdomain
+          }
+        }';
+
+        $variables = ['address' => $address];
+
+        return (new Query(env('OBJKTCOM_INDEXER')))
+            ->resolve($query, $variables)['data']['holder'][0];
     }
 }

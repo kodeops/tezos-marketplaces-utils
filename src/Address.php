@@ -6,11 +6,21 @@ use Illuminate\Support\Facades\Cache;
 use kodeops\LaravelGraphQL\Query;
 use kodeops\TezosMarketplacesUtils\Exceptions\TezosMarketplacesUtilsException;
 use SalesBot\HenQueries;
+use  kodeops\TezosMarketplacesUtils\ObjktCom;
 
 class Address
 {
     const CACHE_PREFIX = 'TezosMarketplacesUtils';
     const CACHE_EXPIRES_IN = 60 * 60 * 60;
+
+    public static function permalink($address, $type = null)
+    {
+        switch ($type) {
+            default:
+                return "https://tzkt.io/{$address}";
+            break;
+        }
+    }
 
     public static function name($address)
     {
@@ -22,6 +32,16 @@ class Address
         $hen = self::hen($address);
         if ($hen) {
             return $hen;
+        }
+
+        $objkt = ObjktCom::holder($address);
+        if ($objkt) {
+            if (isset($objkt['tzdomain'])) {
+                return $objkt['tzdomain'];
+            }
+            if (isset($objkt['alias'])) {
+                return $objkt['alias'];
+            }
         }
     }
 
