@@ -72,7 +72,11 @@ class ObjktCom
 
         $variables = ['address' => $address];
 
-        return (new Query(env('OBJKTCOM_INDEXER')))
-            ->resolve($query, $variables)['data']['holder'][0];
+        $holder = (new Query(env('OBJKTCOM_INDEXER')))
+            ->resolve($query, $variables)['data']['holder'];
+
+        if (count($holder)) {
+            return $holder[0];
+        }
     }
 }
