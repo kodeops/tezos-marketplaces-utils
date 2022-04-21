@@ -29,11 +29,6 @@ class Address
             return $tzprofile['alias'];
         }
 
-        $hen = self::hen($address);
-        if ($hen) {
-            return $hen;
-        }
-
         $objkt = ObjktCom::holder($address);
         if ($objkt) {
             if (isset($objkt['tzdomain'])) {
@@ -43,6 +38,8 @@ class Address
                 return $objkt['alias'];
             }
         }
+
+        return $address;
     }
 
     public static function twitter($address)
