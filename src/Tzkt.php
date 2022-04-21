@@ -5,6 +5,11 @@ use Illuminate\Support\Facades\Http;
 
 class Tzkt
 {
+    public static function permalink(string $address)
+    {
+        return "https://tzkt.io/{$address}";
+    }
+
     public static function baseUrl()
     {
         return env('TZKT_RPC_URL') ?? 'https://api.tzkt.io';
@@ -13,6 +18,13 @@ class Tzkt
     public static function account($address)
     {
         return Http::get(self::baseUrl() . "/v1/accounts/{$address}")
+            ->throw()
+            ->json();
+    }
+
+    public static function accountOperations(string $address)
+    {
+        return Http::get(self::baseUrl() . "/v1/accounts/{$address}/operations")
             ->throw()
             ->json();
     }
