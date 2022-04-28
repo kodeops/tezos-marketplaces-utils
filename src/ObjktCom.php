@@ -37,6 +37,10 @@ class ObjktCom
 
         $profile = Address::name($account['address']);
         if ($profile) {
+            if ($shorten AND $profile == $account['address']) {
+                return Address::shorten($account['address']);
+            }
+
             return $profile;
         }
 
