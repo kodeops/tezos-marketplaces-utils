@@ -21,7 +21,7 @@ class ObjktCom
         return $addresses_formatted;;
     }
 
-    public static function address($account, $shorten = true)
+    public static function address($account, $shorten = false)
     {
         if (! empty($account['alias'])) {
             return $account['alias'];
