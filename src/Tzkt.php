@@ -22,9 +22,13 @@ class Tzkt
             ->json();
     }
 
-    public static function accountOperations(string $address)
+    public static function accountOperations(string $address, array $params = null)
     {
-        return Http::get(self::baseUrl() . "/v1/accounts/{$address}/operations")
+        if ($params) {
+            $params = "?" . http_build_query($params);
+        }
+
+        return Http::get(self::baseUrl() . "/v1/accounts/{$address}/operations{$params}")
             ->throw()
             ->json();
     }
