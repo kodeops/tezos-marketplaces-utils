@@ -132,8 +132,8 @@ class Address
         return $profile;
     }
 
-    public static function shorten($address)
+    public static function shorten($address, $separator = "...")
     {
-        return substr($address, 0, 4) . "..." . substr($address, -4);
+        return substr($address, 0, 4) . $separator . substr($address, -4);
     }
 }
