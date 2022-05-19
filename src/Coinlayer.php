@@ -4,6 +4,7 @@ namespace kodeops\TezosMarketplacesUtils;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use Date;
+use kodeops\TezosMarketplacesUtils\Exceptions\TezosMarketplacesUtilsException;
 
 class Coinlayer
 {
@@ -15,6 +16,10 @@ class Coinlayer
 
     public static function baseUrl()
     {
+        if (! env('COINLAYER_BASE_URL')) {
+            throw new TezosMarketplacesUtilsException("Missing COINLAYER_BASE_URL");
+        }
+
         return env('COINLAYER_BASE_URL');
     }
 
@@ -29,9 +34,8 @@ class Coinlayer
                 'target' => $target,
             ];
 
-            $data = Http::get(self::baseUrl() . "/live?" . http_build_query($params))
-                ->throw()
-                ->json();
+            $url = self::baseUrl() . "/live?" . http_build_query($params);
+            $data = Http::get($url)->throw()->json();
 
             return $data['rates'][$params['symbols']];
         });
@@ -48,9 +52,8 @@ class Coinlayer
                 'target' => $target,
             ];
 
-            $data = Http::get(self::baseUrl() . "/{$date->format('Y-m-d')}?" . http_build_query($params))
-                ->throw()
-                ->json();
+            $url = self::baseUrl() . "/{$date->format('Y-m-d')}?" . http_build_query($params);
+            $data = Http::get($url)->throw()->json();
 
             return $data['rates'][$params['symbols']];
         });

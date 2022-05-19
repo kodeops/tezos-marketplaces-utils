@@ -10,6 +10,13 @@
 
 ## Coinlayer
 
+Add `COINLAYER_BASE_URL` and `COINLAYER_API_KEY` to the environment file:
+
+```
+COINLAYER_BASE_URL=https://api.coinlayer.com
+COINLAYER_API_KEY=api_key
+```
+
 Available targets: [https://coinlayer.com/target](https://coinlayer.com/target)
 
 A simple wrapper to get exchange rates
@@ -23,7 +30,7 @@ use kodeops\TezosMarketplacesUtils;
 
 $rate = Coinlayer::tezos('EUR');
 
-// $rate => '500000000'
+// $rate => '1.754402'
 ```
 
 ### Dated exchange rate
@@ -35,7 +42,7 @@ use kodeops\TezosMarketplacesUtils;
 
 $rate = Coinlayer::tezos('2021-01-01', EUR');
 
-// $rate => '500000000'
+// $rate => '1.754402'
 ```
 
 Response: [https://coinlayer.com/documentation](https://coinlayer.com/documentation)
