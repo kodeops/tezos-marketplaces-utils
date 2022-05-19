@@ -10,7 +10,7 @@ use  kodeops\TezosMarketplacesUtils\ObjktCom;
 
 class Address
 {
-    const CACHE_PREFIX = 'TezosMarketplacesUtils';
+    const CACHE_PREFIX = 'kodeops.TezosMarketplacesUtils';
     const CACHE_EXPIRES_IN = 60 * 60 * 60;
 
     public static function permalink($address, $type = null)

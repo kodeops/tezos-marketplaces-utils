@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Cache;
 
 class Coinlayer
 {
+    const CACHE_PREFIX = 'kodeops.TezosMarketplacesUtils';
+    const CACHE_EXPIRES_IN = 60 * 60 * 60;
     public static function baseUrl()
     {
         return env('COINLAYER_BASE_URL');
@@ -13,10 +15,9 @@ class Coinlayer
 
     public static function tezos()
     {
-        $cache_key = 'kodeops\TezosMarketplacesUtils.coinlayer.tezos';
-
-        // Coinlayer allows 100 free requests a month
-        return Cache::remember($cache_key, 8 * 60 * 60, function () {
+        $cache_key = self::CACHE_PREFIX . '.coinlayer.tezos.live';
+        
+        return Cache::remember($cache_key, self::CACHE_EXPIRES_IN, function () {
             $params = [
                 'access_key' => env('COINLAYER_API_KEY'),
                 'symbols' => 'XTZ',
