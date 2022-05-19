@@ -3,11 +3,15 @@ namespace kodeops\TezosMarketplacesUtils;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use Date;
 
 class Coinlayer
 {
+    // Coinlayer allows 100 free requests a month
+
     const CACHE_PREFIX = 'kodeops.TezosMarketplacesUtils';
     const CACHE_EXPIRES_IN = 60 * 60 * 60;
+
     public static function baseUrl()
     {
         return env('COINLAYER_BASE_URL');
@@ -24,6 +28,24 @@ class Coinlayer
             ];
 
             $data = Http::get(self::baseUrl() . "/live?" . http_build_query($params))
+                ->throw()
+                ->json();
+
+            return $data['rates'][$params['symbols']];
+        });
+    }
+
+    public static function date(Date $date)
+    {
+        $cache_key = self::CACHE_PREFIX . '.coinlayer.tezos.date.' . $date;
+
+        return Cache::remember($cache_key, self::CACHE_EXPIRES_IN, function () {
+            $params = [
+                'access_key' => env('COINLAYER_API_KEY'),
+                'symbols' => 'XTZ',
+            ];
+
+            $data = Http::get(self::baseUrl() . "/{$date->format('Y-m-d')}?" . http_build_query($params))
                 ->throw()
                 ->json();
 
