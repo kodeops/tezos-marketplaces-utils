@@ -48,6 +48,11 @@ class Address
         if ($tzprofile AND isset($tzprofile['twitter'])) {
             return $tzprofile['twitter'];
         }
+
+        $objkt = ObjktCom::holder($address);
+        if ($objkt AND $objkt['twitter']) {
+            return str_replace("https://twitter.com/", "", $objkt['twitter']);
+        }
     }
 
     public static function hen($address)
