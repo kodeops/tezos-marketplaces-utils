@@ -49,6 +49,15 @@ class Address
             return $tzprofile['description'];
         }
     }
+
+    public static function pfp($address)
+    {
+        $tzprofile = self::tzprofiles($address);
+        if ($tzprofile) {
+            return $tzprofile['logo'];
+        }
+    }
+
     public static function twitter($address)
     {
         $tzprofile = self::tzprofiles($address);
