@@ -46,7 +46,7 @@ class Address
     {
         $tzprofile = self::tzprofiles($address);
         if ($tzprofile) {
-            return $tzprofile['description'];
+            return $tzprofile['description'] ?? null;
         }
     }
 
@@ -54,7 +54,7 @@ class Address
     {
         $tzprofile = self::tzprofiles($address);
         if ($tzprofile) {
-            return $tzprofile['logo'];
+            return $tzprofile['logo'] ?? null;
         }
     }
 
