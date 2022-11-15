@@ -42,6 +42,13 @@ class Address
         return $address;
     }
 
+    public static function description($address)
+    {
+        $tzprofile = self::tzprofiles($address);
+        if ($tzprofile) {
+            return $tzprofile['description'];
+        }
+    }
     public static function twitter($address)
     {
         $tzprofile = self::tzprofiles($address);
